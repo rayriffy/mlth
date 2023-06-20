@@ -1,15 +1,16 @@
 ---
+import Base from '$layout/base.astro'
+import IdolMini from '$components/IdolMini.astro'
+
+import { getIdols } from '$functions/getIdols'
+
+const idols = await getIdols()
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+  <ul
+    class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 md:gap-8 justify-center"
+  >
+    {idols.map(idol => <IdolMini id={idol.id} />)}
+  </ul>
+</Base>

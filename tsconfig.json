@@ -1,3 +1,16 @@
 {
-  "extends": "astro/tsconfigs/strict"
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "react",
+    "resolveJsonModule": true,
+    "baseUrl": "./src",
+    "paths": {
+      "$data/*": ["data/*"],
+      "$components/*": ["components/*"],
+      "$layout/*": ["layout/*"],
+      "$functions/*": ["functions/*"],
+      "$types/*": ["@types/*"]
+    }
+  }
 }

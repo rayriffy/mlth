@@ -1,0 +1,26 @@
+---
+import Base from '$layout/base.astro'
+
+import { IdolCard } from '$components/IdolCard' // React
+import IdolDetail from '$components/IdolDetail.vue' // Vue
+import LoadingIcon from '$components/LoadingIcon.svelte' // Svelte
+
+import { getIdol } from '$functions/getIdol'
+
+const { id } = Astro.params
+const idol = await getIdol(Number(id))
+---
+
+<Base>
+  <section class="flex items-center space-x-4">
+    <IdolDetail name={idol.name} icon={idol.cards[0].icon!} />
+  </section>
+  <section class="grid sm:grid-cols-2 md:grid-cols-4 pt-4 gap-4">
+    <div class="cols-span-2 md:col-span-3">
+      <IdolCard id={Number(id)} client:idle />
+    </div>
+    <div class="border-2 rounded-xl p-6 grid grid-cols-2">
+      {idol.icons.map(icon => <LoadingIcon icon={icon} client:idle />)}
+    </div>
+  </section>
+</Base>

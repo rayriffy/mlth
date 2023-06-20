@@ -1,0 +1,29 @@
+---
+/**
+ * This component demo that Astro component can do async/await server-side fetching
+ * and render the result.
+ * https://docs.astro.build/en/core-concepts/astro-components/
+ */
+
+import { getIdol } from '$functions/getIdol'
+
+export interface Props {
+  id: number
+}
+
+const { id } = Astro.props
+const idol = await getIdol(id)
+---
+
+<li>
+  <a href={`/idol/${id}`}>
+    <img
+      src={idol.cards[0].icon!}
+      class="object-cover object-left max-h-24 aspect-square max-w-[75px]"
+      width="96"
+      height="96"
+      loading="lazy"
+    />
+  </a>
+  <h1 class="text-sm font-bold">{idol.name}</h1>
+</li>

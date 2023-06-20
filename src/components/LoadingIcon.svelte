@@ -19,8 +19,6 @@
       jumping = false
     }, 100)
   }
-
-  $: console.log(jumpHeight)
 </script>
 
 <div class="relative aspect-square">

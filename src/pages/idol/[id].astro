@@ -6,9 +6,23 @@ import IdolDetail from '$components/IdolDetail.vue' // Vue
 import LoadingIcon from '$components/LoadingIcon.svelte' // Svelte
 
 import { getIdol } from '$functions/getIdol'
+import { getIdols } from '$functions/getIdols'
+
+import type { GetStaticPaths } from 'astro'
 
 const { id } = Astro.params
 const idol = await getIdol(Number(id))
+
+export const prerender = true
+export const getStaticPaths: GetStaticPaths = async () => {
+  const idols = await getIdols()
+
+  return idols.map(idol => ({
+    params: {
+      id: idol.id,
+    },
+  }))
+}
 ---
 
 <Base>
